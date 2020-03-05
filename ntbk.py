@@ -1,4 +1,5 @@
 import sys, tempfile, os
+from pathlib import Path
 from subprocess import call
 from fuzzywuzzy import process
 
@@ -17,7 +18,7 @@ def ls(entries, args):
 	results = process.extract(args.title, entries.keys(),
 		limit=args.n)
 	for idx, (entry, score) in enumerate(results):
-		print("[{:3d}] {}".format(idx, entry))
+		print("[{:d}] {}".format(idx, entry))
 
 def edit(entries, args):
 	title, score = process.extractOne(args.title, entries.keys())
@@ -43,14 +44,26 @@ def edit(entries, args):
 
 		entries[title] = Entry(edited_message)
 
+def cat(entries, args):
+	title, score = process.extractOne(args.title, entries.keys())
+	if score > args.threshold:
+		entry = entries[title]
+		print(entry.body)
+	else:
+		print("No matching notes.")
+
 # TODO: delete
-# TODO: cat
 
 if __name__ == "__main__":
 	import argparse
 	parser = argparse.ArgumentParser()
 	subparsers = parser.add_subparsers()
-	parser.add_argument("--notebook_path", type=str, default="./notes.txt")
+	parser.add_argument("--notebook_path", type=Path, default="./notes.txt")
+
+	cat_parser = subparsers.add_parser("cat")
+	cat_parser.add_argument("title", type=str)
+	cat_parser.add_argument("--threshold", "-t", default=50, type=int)
+	cat_parser.set_defaults(func=cat)
 
 	edit_parser = subparsers.add_parser("edit")
 	edit_parser.add_argument("title", type=str)
@@ -62,6 +75,9 @@ if __name__ == "__main__":
 	ls_parser.set_defaults(func=ls)
 
 	args = parser.parse_args()
+
+	if not args.notebook_path.exists():
+		args.notebook_path.touch()
 
 	with open(args.notebook_path, "r+") as f:
 		data = f.read()
