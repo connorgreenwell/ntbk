@@ -8,28 +8,46 @@ Quick Start
 
 - ls
 
-    $ python ntbk.py ls
+This command:
+```
+$ python ntbk.py ls
+```
 
-    [0] First Note
-    [1] Second Note
-    [2] Keeping Notes
-    [3] Plans for world domination
-    [4] Papers to read
+Yields:
+```
+[0] First Note
+[1] Second Note
+[2] Keeping Notes
+[3] Plans for world domination
+[4] Papers to read
+```
 
 - search
 
-    $ python ntbk.py ls papers -n 1
+This command:
+```
+$ python ntbk.py ls papers -n 1
+```
 
-    [0] Papers to read
+Yields:
+```
+[0] Papers to read
+```
 
 - cat
 
-    $ python ntbk.py cat "first note"
+This command:
+```
+$ python ntbk.py cat "first note"
+```
 
-    First Note
-    ==========
-    
-    Hello, world!
+Yields:
+```
+First Note
+==========
+
+Hello, world!
+```
 
 TODO
 ----
