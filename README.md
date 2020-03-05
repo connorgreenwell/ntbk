@@ -1,10 +1,21 @@
 ntbk
 ====
 
-*ntbk* is a command line note taking tool. Everything is stored as plain text, and matching is fuzzy.
+*ntbk* is a command line note taking tool. Everything is stored as plain text,
+and matching is fuzzy.
 
 Quick Start
 -----------
+
+- edit
+
+This command:
+```
+$ python ntbk.py edit "New Note"
+```
+will open up $EDITOR and allow you to write a note titled "New Note". If a
+similarly titled note already exists, *ntbk* will open that for editing
+instead.
 
 - ls
 
