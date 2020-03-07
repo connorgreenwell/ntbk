@@ -4,6 +4,19 @@ ntbk
 *ntbk* is a command line note taking tool. Everything is stored as plain text,
 and matching is fuzzy.
 
+Install
+-------
+
+I'm not publishing this to PyPI yet, so right now we have to build/install manually. Easy enough, from the project root:
+
+```
+poetry install
+poetry build
+pip install dist/<whatever>.whl
+```
+
+And now ntbk should be in your path.
+
 Quick Start
 -----------
 

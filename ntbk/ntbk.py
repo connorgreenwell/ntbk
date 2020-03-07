@@ -6,6 +6,8 @@ from fuzzywuzzy import process
 import logging
 logging.disable()
 
+__version__ = "0.1.0"
+
 EDITOR = os.environ.get('EDITOR', 'vim')
 SEPARATOR = "\n/////////////////////////////\n"
 
@@ -54,11 +56,15 @@ def cat(entries, args):
 
 # TODO: delete
 
-if __name__ == "__main__":
+def main():
 	import argparse
 	parser = argparse.ArgumentParser()
 	subparsers = parser.add_subparsers()
-	parser.add_argument("--notebook_path", type=Path, default="./notes.txt")
+	parser.add_argument(
+		"--notebook_path",
+		type=Path,
+		default=os.path.join(os.environ["HOME"], "notes.txt"),
+	)
 
 	cat_parser = subparsers.add_parser("cat")
 	cat_parser.add_argument("title", type=str)
